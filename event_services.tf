@@ -7,11 +7,11 @@ resource "oci_events_rule" "cloud-events-test" {
             action_type = "FAAS"
             is_enabled  = true
             description = "An event rule to invoke function"
-            function_id = oci_functions_function.test_function.id
+            function_id = oci_functions_function.function.id
         }
     }
     compartment_id = var.compartment_ocid
-    condition = "{ \"eventType\": \"com.oraclecloud.objectstorage.createobject\", \"data\": {\"additionalDetails\": {\"bucketId\": \"${oci_objectstorage_bucket.bucket.bucket_id}\" } } }"
+    condition = "{ \"eventType\": \"com.oraclecloud.objectstorage.createobject\", \"data\": {\"additionalDetails\": {\"bucketName\": \"bucket-cc31\" } } }"
     display_name = "cloud-events-test"
     is_enabled = true
     defined_tags   = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }

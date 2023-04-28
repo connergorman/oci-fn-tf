@@ -49,6 +49,14 @@ variable "ocir_user_password" {
   default = ""
 }
 
+variable "image_name" {
+  description = "Name of image in OCIR"
+}
+
+variable "app_display_name" {}
+
+variable "fn_display_name" {}
+
 # OCIR repo name & namespace
 
 locals {

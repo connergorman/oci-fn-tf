@@ -9,6 +9,9 @@ variable "region" {}
 variable "compartment_ocid" {}
 variable "ocir_user_name" {}
 variable "ocir_user_password" {}
+variable "image_name" {}
+variable "app_display_name" {}
+variable "fn_display_name" {}
 
 provider "oci" {
   tenancy_ocid     = var.tenancy_ocid
@@ -19,7 +22,7 @@ provider "oci" {
 }
 
 module "oci-arch-fn-app" {
-  source             = "github.com/oracle-devrel/terraform-oci-arch-fn-app"
+  source             = "../../"
   tenancy_ocid       = var.tenancy_ocid
   user_ocid          = var.user_ocid
   fingerprint        = var.fingerprint
@@ -29,11 +32,11 @@ module "oci-arch-fn-app" {
   ocir_user_name     = var.ocir_user_name
   ocir_user_password = var.ocir_user_password
   use_existing_vcn   = true
-  vcn_id             = oci_core_virtual_network.my_vcn_with_internet_gateway.id
-  fn_subnet_id       = oci_core_subnet.my_public_subnet.id
+  vcn_id             = "ocid1.vcn.oc1.iad.amaaaaaapc6swyaasvtk5w6b4qrf454d6vb7ddkz4fsbl65u5ngo4ydaq6lq"
+  fn_subnet_id       = "ocid1.subnet.oc1.iad.aaaaaaaaezobtwfr4gyys4cctenbw27lk6pvd2fdw7gdvjzlulmqp72ydc6q"
+  image_name         = var.image_name
+  fn_display_name    = var.fn_display_name
+  app_display_name   = var.app_display_name
 }
 
-output "buckets_created" {
-  value = module.oci-arch-fn-app.buckets_created
-}
 

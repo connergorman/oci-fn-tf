@@ -14,7 +14,7 @@ resource "oci_logging_log" "log_on_fn_invoke" {
     configuration {
         source {
             category = "invoke"
-            resource = oci_functions_application.test_application.id
+            resource = oci_functions_application.application.id
             service = "functions"
             source_type = "OCISERVICE"
         }
